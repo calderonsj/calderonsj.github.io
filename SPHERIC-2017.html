@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>A single-phase SPH model for evaporation and condensation phenomena</title>
+
+		<meta name="description" content="Presentación para el seminario de generación de curvas">
+		<meta name="author" content="Javier Calderón-Sánchez">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<!-- Change to black.css for black background with white font. white.css for white background and black font -->
+		<!-- Other options in css/theme: beige - blood - league - moon - night - serif - simple - sky - solarized -->
+		<link rel="stylesheet" href="css/theme/black.css" id="theme">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+		
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+	
+		<div class="reveal">
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<!-- Slide 1: TITLE -->			
+				<section id="Title" class="present" data-background="">
+					<section>
+						<h3>XII SPHeric Conference Ourense 2017</h3>
+						<h2>A single-phase SPH model for evaporation and condensation phenomena</h2>
+						<p></p>
+						<p></p>
+						<br>
+						<br>
+						<p>
+							</p><small><table style="width:100%">
+								<tbody>
+								<tr>
+									<td style="vertical-align : top ">
+									Daniel Duque
+									</td>
+									<td style="text-align : center">
+										Javier Calderon-Sanchez <br>
+										<a href="mailto://javier.calderon@upm.es">javier.calderon@upm.es</a><br>
+										<br>
+										<br>
+										Universidad Politécnica de Madrid<br>
+										15/06/2017
+									</td>
+									<td style="vertical-align : top ">
+									Antonio Souto-Iglesias
+									</td>
+								</tr>
+								</tbody>
+								</table></small>
+						<p></p>
+					</section>									
+				</section>	
+	
+				<!-- Slide 2 -->
+				<section id="2" class="present" style="top: 0px; display: block; text-align: left;">
+					<section data-background-video="./videos/SPHERIC-2017/3DTank.mp4" data-background-video-loop style="top: 200px; display: none;">
+					<aside class="notes">
+        				* Let's start by the beginning <br>
+        				* Nothing very remarkable in this video. We already know how SPH solves this, right?
+						<img class="plain" src="imgs/SPHERIC-2017/NewHeader.png" style="width:20%;float:right">
+    				</aside>
+					</section>
+					<section class="present" style="top: 200px; display: none;">
+					<h2 class="fragment" style="text-align:center">BUT!</h2>
+					<p class="fragment" style="text-align:center">There are applications where we need to consider thermal effects</p>
+					</section>
+					<section style="top: 200px; display: none;">
+					<p class="fragment" style="text-align:left">In particular those where :
+					<ul class="fragment" style="text-align:left">
+					<li>Liquids are carried at cryogenic temperatures</li> 
+					<li>In equilibrium with their gas phase</li>
+					</ul>
+					</p>
+					</section>
+				</section>
+				<!-- Slide 4 -->
+				<section id="3" class="present" style="top: 0px; display: block; text-align: center;">
+					<section style="top: 200px; display: none; text-align:left">
+					<h3>Applications</h3>
+					<block style="float:left; width: 50%;">
+					<img class="plain" src="imgs/SPHERIC-2017/LNGTank.png" style="height:300px;border:none;box-shadow:none; float:left">
+					<p style="text-align:left"><small>LNG carrier tanks</small></p>
+					</block>
+					<block style="float:right; width: 50%;">
+					<img class="plain" src="imgs/SPHERIC-2017/RollTankVolume.png" style="height:300px;border:none;box-shadow:none; float:right">
+					<p style="text-align:center"><small>Upper stages of propellant rockets</small></p>
+					</block>
+					</section>
+					<section>
+					<h3 style="fragment current-visible">Why?</h3>
+					<p style="text-align:left">Thermal effects induce evaporation-condensation</p>
+					<p style="text-align:left">Rates of evaporation and condensation depend on tank pressure</p>
+					<p style="text-align:left">When sloshing, pressure variations can be significant, and modify such rates</p>
+					<p style="text-align:left">Therefore, an accurate prediction of these is necessary</p>
+					</section>
+				</section>											
+				<!-- Slide 5 -->
+				<section id="5" class="present" style="top: 0px; display: block; text-align: left;">															
+					<section style="top: 0px; display: block; text-align: left;">
+					<h2>So, which is the approach to follow?</h2>
+					</section>
+					<section data-background-image="./imgs/SPHERIC-2017/Two-phase_Monaghan.png" data-background-position="center" data-background-size="30%">
+					<aside class="notes">
+					Source: "Monaghan, Joseph J. and Huppert, Herbert E. and Worster, M. Grae. Solidification Using Smoothed Particle Hydrodynamics. J. J. Comput. Phys. 2005" <br>
+					We might think about a two-phase approach, in which gas phase is modelled as well as liquid phase<br>
+					However, for the applications that we want to test, this would be computationally costly.
+					</aside>
+					</section>
+					<section style="top: 0px; display: none; text-align: left">
+					<h2>IDEA!</h2>
+					<img class="plain" src="imgs/SPHERIC-2017/Eureka.jpg" style="width:450px;height:350px;border:none;box-shadow:none; float:right">					
+					</section>
+					<section style="top: 0px; display: none; text-align: left">
+					<h3>Assumptions</h3>
+					<p>Gas phase properties can be averaged, so they are considered homogeneous:</p>
+					<ul>
+					<li>Speed of sound in the gas is large enough to allow pressure changes induced in the interface to be transmitted to the gas phase in time scale much shorter than the ones in the sloshing phenomena</li>
+					<li>Convective effects on the gas are large enough to spread the temperature over the gas volume at the same time</li>
+					</ul>
+					</section>
+					<section style="top: 0px; display: none; text-align: center">
+					<h3 style="text-align: left">Aim</h3>
+					<blockquote style="width:100%; text-align:justify">To take advantage of a robust and accurate free surface flows solver and increase its applicability with a fast
+					and simple condensation-evaporation model which is accurate enough for certain applications</blockquote>
+					</section>
+				</section>				
+				<!-- Slide 6 -->
+				<section id="6" class="present" style="top: 0px; display: block; text-align: left;">
+					<section style="top: 0px; display: block; text-align: left;">
+					<h3>The method: 1D Stefan Problem Benchmark</h3>
+					<block class="fragment" data-fragment-index="1">
+					<img class="plain" src="imgs/SPHERIC-2017/Geometry.png" style="position:absolute;height:70%; width:35%; border:none;box-shadow:none">
+					</block>
+					<block class="fragment" data-fragment-index="2">					
+					<img class="plain" src="imgs/SPHERIC-2017/Geometry_test/Diapositiva2.png" style="position:absolute;height:70%; width:35%; border:none;box-shadow:none">
+					</block>
+					<block class="fragment" data-fragment-index="3">					
+					<img class="plain" src="imgs/SPHERIC-2017/Geometry_test/Diapositiva3.png" style="position:absolute;height:70%; width:35%; border:none;box-shadow:none">
+					</block>
+					<block class="fragment" data-fragment-index="4">					
+					<img class="plain" src="imgs/SPHERIC-2017/Geometry_test/Diapositiva4.png" style="position:absolute;height:70%; width:35%; border:none;box-shadow:none">
+					</block>
+					<block class="fragment" data-fragment-index="5">					
+					<img class="plain" src="imgs/SPHERIC-2017/Geometry_test/Diapositiva5.png" style="position:absolute;height:70%; width:35%; border:none;box-shadow:none">
+					</block>
+					<div style="width:60%; float:right">
+					<p class="fragment" data-fragment-index="1">Gas phase</p>
+					<p class="fragment" data-fragment-index="2">
+					\[ \frac{dT_{\mathrm{gas}}}{dt} = \frac{q_{\mathrm{w}} \ A_{\mathrm{q}}}{C_{\mathrm{v}} \ m_{\mathrm{gas}}} \]
+					</p>
+					<p class="fragment" data-fragment-index="3">
+					\[ p_{\mathrm{gas}} = \rho_{\mathrm{gas}}\ R_{\mathrm{gas}}\ T_{\mathrm{gas}} \]
+					</p>
+					<p class="fragment" data-fragment-index="4">
+					\[ \frac{{dT_{\mathrm{sat}}}}{dt} = \frac{q_{\mathrm{iv}} A_{\mathrm{int}}}{C_{\mathrm{l}} \ m_{\mathrm{int}}}  \]
+					</p>					
+					<p class="fragment" data-fragment-index="5">
+					\[ p_{\mathrm{sat}} = \exp \left[ - \left(\frac{\Delta H_{\mathrm{v}}}{R_{\mathrm{gas}}}\right) \frac{1}{T_{\mathrm{sat}}} + B\right] \]
+					</p>					
+					</div>
+					</section>
+					<section style="top: 200px; display: none; text-align:center">
+					<p style="text-align:left">Liquid phase</p>
+					<p>
+					\[ \rho \ c_{\mathrm{p}} \frac{d{T}}{dt} = \nabla \cdot (k\, \nabla T) - p \ \nabla \cdot \mathbf{u} + \color{red}{\phi_v} + \color{red}{Q} \]
+					</p>
+					<p>
+					\[ c_p \, \left. \frac{d{T}}{dt} \right\rvert_i = \frac{1}{\rho_i} \, \left( \sum_{j} \Theta_{ij} \nabla_i W_{ij}  V_j + \sum_{j} p_j \left( \mathbf{u}_j - \mathbf{u}_i \right) \cdot \nabla_i W_{ij} V_j \right) \]
+					</p>
+					<p>
+					\[ \Theta_{ij} := ( k_i + k_j) \ \frac{ (T_{j} - T_{i}) \cdot \mathbf{r}_{j i}}{\| \mathbf{r}_{j i} \|^2} \]
+					</p>
+					</section>
+					<section style="top: 0px; display: block; text-align: center;">
+					<h4>In order to perform the mass transfer between the phases</h4>
+					<br>
+					<p>					
+					\[ \dot{m} = A_{int} \sqrt{\frac{M}{2\pi R_{\mathrm{u}}}} \left( \color{red}{\alpha_{\mathrm{e}}} \frac{p_{\mathrm{sat}}}{\sqrt{T_{\mathrm{sat}}}}
+					 - \color{red}{\alpha_\mathrm{{c}}} \frac{p_{\mathrm{gas}}}{\sqrt{T_{\mathrm{gas}}}}\right) \]
+					</p>
+					<br>
+					<p>Hertz-Knudsen relation</p>
+					</section>
+					<section style="top: 0px; display: block; text-align: left;">
+					<h3>Results: 1D Stefan Problem Benchmark</h3>
+					<img class="plain" src="imgs/SPHERIC-2017/evaporation.png" height="450" width="450" style="float: left">
+					<img class="plain" src="imgs/SPHERIC-2017/condensation.png" height="450" width="450" style="float: right">
+					<br>
+					<div style="text-align:center">
+					<small>
+					Results for the evaporation (left) and condensation (right) of the SPH method compared to the analytical solution (red line)
+					</small>
+					</div>
+					</section>
+					<section style="top: 0px; display: block; text-align: left;">
+					<h4>What happens with $\alpha$?</h4>
+					<p>$\alpha$ is a coefficient that accounts for the efficiency of the mass transfer. Should be $\leq$ 1</p>
+					<table>
+						<thead>
+							<tr>
+								<th>Work</th>
+								<th>$\alpha$</th>
+								<th>T (K)</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>Rideal (1925)</td>
+								<td>0.003</td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>Hagen et al (1989)</td>
+								<td>0.01 - 0.1</td>
+								<td>282 - 293</td>
+							</tr>
+							<tr>
+								<td>Shaw \& Lamb (1999)</td>
+								<td>0.04 - 0.1</td>
+								<td>238</td>
+							</tr>
+							<tr>
+								<td>Bulba (2015)</td>
+								<td>$10^{-4}$</td>
+								<td>313</td>
+							</tr>
+						</tbody>
+					<caption>Table 1: Accommodation coefficients for water obtained experimentally</caption>
+					</table>
+					</section>
+				</section>
+				<!-- Slide 7 -->
+				<section id="End" class="present" style="top: 0px; display: block; text-align: left;">
+					<h3>Applicability</h3>
+					<section data-background-video="./videos/SPHERIC-2017/3DTank_Evap.mp4" data-background-video-loop style="top: 200px; display: none;">
+					<aside class="notes">
+					<img class="plain" src="imgs/SPHERIC-2017/NewHeader.png" style="width:20%;float:right">
+					</aside>
+					</section>
+				</section>
+				<!-- Slide 8 -->
+				<section id="End" class="present" style="top: 0px; display: block; text-align: left;">
+					<section style="top: 0px; display: none;">
+					<h3>Conclusions</h3>
+					<ul>
+					<li>A single-phase evaporation-condensation algorithm has been implemented.</li>
+					<li>Gas phase is modelled by averaging its thermodynamics properties.</li>
+					<li>It is fast. It is simple.</li>
+					<li>The model is developed for a 1D application and extended easily to 2D and 3D applications.</li>
+					</ul>
+					</section>	
+					<section style="top: 0px; display: none;">
+					<h3>Which are the following steps?</h3>
+					<ul>
+					<li>A more general appearance/removal particle algorithm is to be developed</li>
+					<li>Results for the 2D and 3D applications need validation</li>
+					</ul>
+					</section>
+				</section>
+				<section id="Final" class="present" style="top: 0px; display: block; text-align: center;">
+				<h2>Thanks for your attention</h2>
+				<img class="plain" src="imgs/SPHERIC-2017/EscUpmPolit.jpg" style="width:20%;height:150px;float:center">
+				<img class="plain" src="imgs/SPHERIC-2017/NewHeader.png" style="width:40%;height:150px;float:center">
+				<img class="plain" src="imgs/SPHERIC-2017/cehinav.jpg" style="width:20%;height:150px;float:center">
+				</section>																									
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+
+			// More info https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: false,
+				progress: true,
+				history: true,
+				center: true,
+				// Flags if speaker notes should be visible to all viewers
+                showNotes: true,
+				
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+				
+				math: {
+					// mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+					config: 'TeX-AMS_HTML-full'
+				},
+				// More info https://github.com/hakimel/reveal.js#dependencies
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'lib/js/classList.js' },
+					{ src: 'plugin/math/math.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
