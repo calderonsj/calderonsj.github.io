@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Introducción a OpenFOAM</title>
+
+		<meta name="description" content="Introducción al curso de Simulación Numérica de Fluidos con Código Abierto">
+		<meta name="author" content="Javier Calderón-Sánchez">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<!-- Change to black.css for black background with white font. white.css for white background and black font -->
+		<!-- Other options in css/theme: beige - blood - league - moon - night - serif - simple - sky - solarized -->
+		<link rel="stylesheet" href="css/theme/black.css" id="theme">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+		
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+	
+		<div class="reveal">
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">			
+				<section id="Title" class="present" data-background="">
+				<h2>Simulación numérica de fluidos con código abierto</h2>
+				<p>Curso 2017/18</p>
+				</section>						
+				<!-- Primera diapo -->
+				<section>
+				<h2>¿Cómo funciona un CFD?</h2>
+				<img class="plain" src="imgs/SetUp.png" style="width:100%">
+				</section>
+				<!-- Segunda -->												
+				<section id="1" class="present" data-background="">
+				<h2>Primeros pasos</h2>
+				</section>
+				<!-- Tercera (compuesta) -->
+				<section>
+				<section>
+				<p>¿Dónde está OpenFOAM?</p>
+				<pre><code>/opt/OpenFOAM/</code></pre>
+				<p>¿De qué se compone?</p>
+				</section>
+				<section>
+				<ul>
+				<li>Volvamos a nuestro home. Teclea blockMesh. <a href="#/4">¿Funciona?</a></li> <!-- Link a otra diapositiva -->
+				<li>Vamos a crear un directorio de trabajo:</li>
+				<pre><code>mkdir -p $FOAM_RUN</code></pre>
+				<li>Vamos a trabajar con nuestro primer tutorial. Lo copiamos a nuestro directorio recién creado.</li>
+				<pre><code>cd $FOAM_RUN</code></pre>
+				<pre><code>cp -r $FOAM_TUTORIALS/incompressible/icoFoam/cavity/cavity .</code></pre>
+				</ul>
+				</section>
+				</section>
+				<section id="4">
+				<h2>OpenFOAM Set Up</h2>
+				<section>
+				<pre><code>source ~/opt/OpenFOAM-x.x/etc/bashrc</code></pre>
+				<p>Tendríamos que repetir esto cada vez que abrimos terminal. Un poco rollo, ¿no?</p>
+				</section>
+				<section>
+				<ul>
+				<li>Mejor abrimos desde home el archivo ./bashrc. ¿Recuerdas cómo verlo? ls -</li>
+				<li>Una vez abierto (mousepad), vamos a la última línea. Incluimos la linea de código ahí</li>
+				<li>Hay una forma aún mejor. Con un alias. Esto es útil si tenemos varias versiones de OF.</li>
+				<pre><code>source ofxx='~/opt/OpenFOAM-x.x/etc/bashrc'</code></pre>
+				<li>En la terminal, para cargar OF habrá que teclear el alias de la versión que queramos</li>
+				</ul>
+				</section>
+				</section>
+				<section>
+				<h2>Variables de entorno</h2>
+				<ul>
+				<li>A veces, es útil definir variables de entorno para facilitar el acceso a ciertas rutas, o almacenar variables, etc.</li>
+				<li>OpenFOAM tiene algunas de ellas. Normalmente empiezan con WM_ o FOAM_</li>
+				<li>¿Qué acciones podemos realizar?</li>
+				<pre><code>echo $MY_ENV_VAR</code></pre>
+				<pre><code>ls -l $MY_ENV_VAR</code></pre>
+				<pre><code>cd $MY_ENV_VAR</code></pre>
+				</ul>
+				</section>
+				</section>
+				<section>
+				<p>¡Y ya lo tenemos todo!</p>
+				<p>Podemos empezar a usar OpenFOAM</p>
+				</section>
+				<section>
+				<h2>Referencias</h2>
+				<ul>
+				<li><a href="openfoamwiki.net/index.php/Installation/Working_with_the_Shell">OpenFOAM Wiki Page</a></li>
+				<li>OpenFOAM 4.0 User Guide</li>
+				<li><a href="http://www.tfd.chalmers.se/~hani/kurser/OS_CFD_2008/userGuide_chap1-2.pdf">Chalmer's OpenSource CFD Course</a></li>
+				</ul>
+				</section>									
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+
+			// More info https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: false,
+				progress: true,
+				history: true,
+				center: true,
+				// Flags if speaker notes should be visible to all viewers
+                showNotes: true,
+				
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+				
+				math: {
+					// mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+					config: 'TeX-AMS_HTML-full'
+				},
+				// More info https://github.com/hakimel/reveal.js#dependencies
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'lib/js/classList.js' },
+					{ src: 'plugin/math/math.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
