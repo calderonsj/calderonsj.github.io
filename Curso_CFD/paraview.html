@@ -1,0 +1,254 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+				<h2>Simulación numérica de fluidos con código abierto</h2>
+				<p>Created by</p><p>Javier Calderon-Sanchez</p>
+				<a href="mailto://javier.calderon@upm.es">javier.calderon@upm.es</a>
+				<!--p>and</p><p>Daniel Duque Campayo</p>
+				<a href="mailto://daniel.duque@upm.es">daniel.duque@upm.es</a-->
+				</section>
+				<section>
+				<h3>Tutorial ParaView</h3>
+				<img src="https://3.bp.blogspot.com/-T0gMANeDT_k/UnAgbaMGxHI/AAAAAAAADww/CFImh-tt4Q8/s1600/ParaView+logo.png" style="border:none; box-shadow:none;">
+				<p>v5.0.1</p>
+				</section>
+				<section>
+				<h3>Interfaz</h3>
+				<block>
+				<img style="width:45%" src="imgs/TutorialParaview/Interfaz.png">
+				</block>
+				<div style="width:45%; float:right">
+				<ul>
+				<li>Barra de menú</li>
+				<li>Barra de herramientas</li>
+				<li>Pipeline browser</li>
+				<li>Barra de propiedades</li>
+				<li>Visor 3D</li>
+				</ul>
+				</div>
+				<div style="float:left">
+				<img class="fragment" data-fragment-index="1" style="position:absolute" src="imgs/TutorialParaview/Interfaz.png">
+				</div>
+				</section>
+				<section>
+				<ol>
+				<li><span style="color:red">Barra de menú</span>: permite acceder a la mayoría de características del programa, como herramientas de archivo, edición, etc.</li>
+				<li><span style="color:red">Barra de herramientas</span>: permite el acceso rápido a las herramientas más empleadas en paraView</li>
+				<li><span style="color:red">Pipeline browser</span>: paraView organiza los datos y las acciones a realizar sobre ellos con este tipo de arquitectura. Te permite ver la secuencia de operaciones y acciones realizadas, así como los datos cargados al programa de forma estructurada.</li>
+				<li><span style="color:red">Barra de propiedades</span>: permite ver y cambiar los parámetros asociados a una acción particular. </li>
+				<li><span style="color:red">Visor 3D</span>: la interfaz propiamente dicha. Permite visualizar los datos.</li>
+				</ol>
+				</section>
+				<section>
+				<h3>Streamlines</h3>
+				<block>
+				<img style="width:45%" src="imgs/TutorialParaview/Streamline.png">
+				</block>
+				<div style="width:45%; float:right">
+				<ul>
+				<li>Selecciona el filtro Stream Tracer</li>
+				<li>Seed type: High Resolution Line Source. Eje Y</li>
+				<li>Resolution: 20</li>
+				</ul>
+				</div>
+				<div style="float:left">
+				<img class="fragment" data-fragment-index="1" style="position:absolute" src="imgs/TutorialParaview/Streamline.png">
+				</div>
+				</section>
+				<section>
+				<h3>Pipeline</h3>
+				<block>
+				<img style="width:45%" src="imgs/TutorialParaview/Pipe.png">
+				</block>
+				<div style="width:45%; float:right">
+				<ul>
+				<li>Sobre el streamline creado:</li>
+				<li>Filter: tube</li>
+				<li>Radio</li>
+				</ul>
+				</div>
+				<div style="float:left">
+				<img class="fragment" data-fragment-index="1" style="position:absolute" src="imgs/TutorialParaview/Pipe.png">
+				</div>
+				</section>
+				<section>
+				<h3>Contour</h3>
+				<block>
+				<img style="width:45%" src="imgs/TutorialParaview/Contour.png">
+				</block>
+				<div style="width:45%; float:right">
+				<ul>
+				<li>Selecciona el filtro Contour</li>
+				<li>Contour by: p field</li>
+				<li>Establece el rango en isosurfaces (add range)</li>
+				</ul>
+				</div>
+				<div style="float:left">
+				<img class="fragment" data-fragment-index="1" style="position:absolute" src="imgs/TutorialParaview/Contour.png">
+				</div>
+				</section>
+				<section>
+				<h3>Velocity vectors</h3>
+				<block>
+				<img style="width:45%" src="imgs/TutorialParaview/VelVector.png">
+				</block>
+				<div style="width:45%; float:right">
+				<ul>
+				<li>Selecciona el filtro Glyph</li>
+				<li>Glyph type: arrow</li>
+				<li>Active Attributes: vectors: U</li>
+				</ul>
+				</div>
+				<div style="float:left">
+				<img class="fragment" data-fragment-index="1" style="position:absolute" src="imgs/TutorialParaview/VelVector.png">
+				</div>
+				</section>
+				<section>
+				<h3>Calculator</h3>
+				<block>
+				<img style="width:45%" src="imgs/TutorialParaview/Calculator.png">
+				</block>
+				<div style="width:45%; float:right">
+				<ul>
+				<li>Para calcular nuevos campos</li>
+				<li>Realiza operaciones matemáticas sobre los campos existentes</li>
+				</ul>
+				</div>
+				<div style="float:left">
+				<img class="fragment" data-fragment-index="1" style="position:absolute" src="imgs/TutorialParaview/Calculator.png">
+				</div>
+				</section>
+				<section>
+				<section>
+				<h3>Clip y slice</h3>
+				<block>
+				<img style="width:45%" src="imgs/TutorialParaview/Clip.png">
+				</block>
+				<div style="width:45%; float:right">
+				<ul>
+				<li>Clip:corta parte del dominio</li>
+				<li>Slice: corta un plano del dominio</li>
+				</ul>
+				</div>
+				<div style="float:left">
+				<img class="fragment" data-fragment-index="1" style="position:absolute" src="imgs/TutorialParaview/Clip.png">
+				</div>
+				</section>
+				<section>
+				<h3>Clip y slice</h3>
+				<block>
+				<img style="width:45%" src="imgs/TutorialParaview/Slice.png">
+				</block>
+				<div style="width:45%; float:right">
+				<ul>
+				<li>Clip:corta parte del dominio</li>
+				<li>Slice: corta un plano del dominio</li>
+				</ul>
+				</div>
+				<div style="float:left">
+				<img class="fragment" data-fragment-index="1" style="position:absolute" src="imgs/TutorialParaview/Slice.png">
+				</div>
+				</section>
+				</section>
+				<section>
+				<h3>Plot over line</h3>
+				<block>
+				<img style="width:45%" src="imgs/TutorialParaview/PlotOverLine.png">
+				</block>
+				<div style="width:45%; float:right">
+				<ul>
+				<li>Selecciona el filtro Plot Over Line</li>
+				<li>En la barra de propiedades, selecciona los puntos inicial y final de la línea</li>
+				<li>En Series Parameters, puedes seleccionar los campos que representar</li>
+				</ul>
+				</div>
+				<div style="float:left">
+				<img class="fragment" data-fragment-index="1" style="position:absolute" src="imgs/TutorialParaview/PlotOverLine.png">
+				</div>
+				</section>
+				<section>
+				<h3>Guardar una imagen</h3>
+				<ul>
+				<li>En la barra de menú, selecciona File -> Save Screenshot</li>
+				<li>Selecciona la resolución.</li>
+				<li>Selecciona la localización para guardar la imagen, y su formato (PNG, JPEG,etc.)</li>
+				</ul>
+				</section>
+				<section>
+				<h3>Crear una animación</h3>
+				<ul>
+				<li>En la barra de menú, selecciona File -> Save Animation</li>
+				<li>Selecciona los fps (24 para tiempo real) y la resolución</li>
+				<li>Selecciona la localización para guardar la animación, y su formato (conjunto de frames en PNG o JPEG, o formato de vídeo .ogv)</li>
+				</ul>
+				<p>Si guardas como un conjunto de frames en, por ejemplo, JPEG, para crear un video, desde la terminal tienes que introducir el comando:</p>
+				<pre><code>ffmpeg -i cavity.000%d.jpg video.mp4</code></pre>
+				<p>Cambiar formato input de acuerdo a tu salida de paraView.</p>
+				</section>
+				<section>
+				<section>
+				<h3>Otros filtros</h3>
+				<ul>
+				<li>Threshold: selecciona un conjunto de celdas de acuerdo a un rango (campo escalar)</li>
+				<li>AnnotateTimeFilter: introduce un texto con el tiempo de simulación. Se puede formatear para escalarlo, adimensionalizarlo, introducir texto, etc.</li>
+				<li>Extract Selection: extrae un conjunto de celdas seleccionadas para considerarlas como un subconjunto de datos sobre el que aplicar acciones.</li>
+				<li>Reflect: copia la geometría sobre un plano de simetría.</li>
+				<li>Descriptive Statistics: calcula la información de los campos seleccionados y calcula variables estadísticas, como la media o la desviación estándar, para cada paso de tiempo.</li>
+				</ul>
+				</section>
+				<section>
+				<p>Recuerda que para ver más filtros, en la barra de menú -> Filters -> Alphabetical</p>
+				</section>
+				</section>
+				<section>
+				<h3>Referencias</h3>
+				<ul>
+				<li><a href="http://www.training.prace-ri.eu/uploads/tx_pracetmo/ParaviewGUI_01.pdf">Paraview tutorial</a></li>
+				<li><a href="https://www.paraview.org/Wiki/images/f/f7/ParaViewTutorial51.pdf">Paraview official</a></li>
+				</ul>
+				</section>
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				history: true,
+				// More info https://github.com/hakimel/reveal.js#dependencies
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+	</body>
+</html>
