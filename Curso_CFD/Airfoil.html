@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Correr un airfoil con OpenFOAM y snappyHexMesh</title>
+
+		<meta name="description" content="Introducción al curso de Simulación Numérica de Fluidos con Código Abierto">
+		<meta name="author" content="Javier Calderón-Sánchez">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<!-- Change to black.css for black background with white font. white.css for white background and black font -->
+		<!-- Other options in css/theme: beige - blood - league - moon - night - serif - simple - sky - solarized -->
+		<link rel="stylesheet" href="css/theme/black.css" id="theme">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+		
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+	
+		<div class="reveal">
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">			
+				<section id="Title" class="present" data-background="">
+				<h2>Simulación numérica de fluidos con código abierto</h2>
+				<p>Curso 2017/18</p>
+				</section>						
+				<section>
+				<p>Hemos visto cómo generar un cilindro con snappyHexMesh</p>
+				<p>¿Cómo hacemos si queremos introducir una forma más compleja, como por ejemplo, un perfil?</p>
+				</section>												
+				<section id="1" class="present" data-background="">
+				<h2>Generando la geometría</h2>
+				<p>Hay que generar un stl. Hay varias opciones:</p>
+				<ol>
+				<li>Generar el stl en Rhinoceros o un programa de modelado similar</li>
+				<li>Generarlo a partir de un script de Matlab, Octave o Python</li>
+				</ol>
+				</section>
+				<section>
+				<p>En este caso, vamos a utilizar un script de Python</p>
+				<p>Descarga el archivo desde <a HREF="./NACAS2TL.py" download>aqui</a></p>
+				</section>
+				<section id="4">
+				<p>Copia en primer lugar el archivo del wingMotion y renómbralo como airfoil</p>
+				<p>Borra la carpeta wingMotion2D_pimpleDyMFoam</p>
+				<p>De la carpeta wingMotion2D_simpleFoam, coge:</p>
+				<ol>
+				<li>transportProperties y turbulenceProperties de constant</li>
+				<li>la carpeta 0</li>
+				<li>extrudeMeshDict y createPatchDict de system</li>
+				</ol>
+				<p>Cópialo en la carpeta donde se generará la malla</p>
+				<p>Guarda el archivo descargado en constant/triSurface, y ejecútalo</p>
+				<p>Se habrá creado un nuevo archivo llamado airfoil.stl</p>
+				</section>
+				<section>
+				<p>Vamos a preparar el stl para introducirlo en snappy</p>
+				<p>Descarga el archivo <a HREF="./surfaceFeatureExtractDict" download>surfaceFeatureExtractDict</a></p>
+				<p>Copialo en el directorio system</p>
+				</section>
+				<section>
+				<section>				
+				<p>Abre ahora snappyHexMeshDict e introduce lo siguiente en lugar del cilindro</p>
+				<pre><code>
+geometry
+{
+	airfoil.stl
+	{
+		type triSurfaceMesh;
+		name wing:
+	}
+}
+</code></pre>
+				</section>
+				<section>
+				<p>Y lo siguiente en el apartado features</p>
+				<pre><code>
+features
+(
+	{
+		file "airfoil.eMesh";
+		level 0;
+	}
+);
+</code></pre>
+				<p>Añade por último</p>
+<pre><code>
+//- Highly experimental and wip: number of feature edge snapping
+//  iterations. Leave out altogether to disable.
+nFeatureSnapIter  10;
+</code></pre>
+				<p>Deja todo lo demás igual, de momento.</p>
+				</section>	
+				</section>
+				<section>
+				<p>Para generar la malla, haz, desde el directorio principal:</p>
+<pre><code>
+blockMesh
+surfaceFeatureExtract
+snappyHexMesh -overwrite
+extrudeMesh
+createPatch -overwrite
+</code></pre>
+				</section>				
+				<section>
+				<p>¡Y a correr! (simpleFoam)</p>
+				</section>
+				<section>
+				<h2>Referencias</h2>
+				<ul>
+				<li><a href="www.hpc.ntnu.no/display/hpc/OpenFOAM+-+Airfoil+Calculations">OpenFOAM - Airfoil Calculations (NTNU)</a></li>
+				</ul>
+				</section>									
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+
+			// More info https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+				// Flags if speaker notes should be visible to all viewers
+                showNotes: true,
+				
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+				
+				math: {
+					// mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+					config: 'TeX-AMS_HTML-full'
+				},
+				// More info https://github.com/hakimel/reveal.js#dependencies
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'lib/js/classList.js' },
+					{ src: 'plugin/math/math.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
