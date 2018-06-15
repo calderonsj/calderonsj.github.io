@@ -76,12 +76,12 @@
 				<section id="2" class="present" style="top: 0px; display: block; text-align: left;" data-background-image="">
 				<section>
 				<h2>AIM</h2>
-				<p>Analyze phase change in the context of LNG tank impacts in order to determine its influence over the whole sloshing phenomena</p>
+				<p>To analyze phase change in LNG tank impacts, in order to determine its influence on sloshing phenomena</p>
 				</section>
 				<section>
 				<h2>INDEX</h2>
 				<ol>
-				<li>Phisical phenomena associated to sloshing</li>
+				<li>Physical phenomena associated to sloshing</li>
 				<li>Physics of phase change</li>
 				<li>Numerical model</li>
 				<li>Results</li>
@@ -94,10 +94,10 @@
 				<h3>Physical phenomena in sloshing</h3>
 				<p>Difficult to assess! Why?</p>
 				<ul>
-				<li>Violent short duration impact (stochastic behaviour)...</li>
+				<li>Violent, short duration, impact (stochastic behaviour)...</li>
 				<li>... at cryogenic conditions</li>
-				<li>of a relatively high liquid/vapour density ratio fluid</li>
-				<li>and transported in huge amounts (up to 1,000 olympic pools!)</li>
+				<li>relatively high liquid/vapour density ratio</li>
+				<li>transported in huge amounts (up to 1 000 olympic pools!)</li>
 				</ul>
 				<p>This makes it difficult to obtain accurate predictions experimentally <span>&#9760;</span></p>
 				<p>Let's try the numerical approach then!</p>
@@ -106,7 +106,7 @@
 				<!-- Slide 4 -->
 				<section id="4" class="present" style="top: 0px; display: block; text-align: left;">
 				<section>
-				<aside>Why phase change on sloshing?</aside>
+				<aside>Why phase change in sloshing?</aside>
 				<p>Phenomenology of pressure impacts &#8594; Effects</p> <!-- &#8594 This is an arrow -->
 				<img class="plain" src="imgs/Momentum.png" style="width:100%; border:none;box-shadow:none">
 				</section>
@@ -133,9 +133,9 @@
 				<section id="5" class="present" style="top: 0px; display: block; text-align: left;">
 				<section>
 				<h3>Conservation Equations</h3>
-				\[ \frac{\partial (\alpha_l)}{\partial t} + \nabla \cdot (\alpha_l \mathbf{u}) + \nabla \cdot \alpha_l \alpha_v \mathbf{u}_r) = 0 \]
+				\[ \frac{\partial (\alpha_l)}{\partial t} + \nabla \cdot (\alpha_l \mathbf{u}) + \nabla \cdot  (\alpha_l \alpha_v \mathbf{u}_r) = 0 \]
 				<br>
-				\[ \frac{\partial (\rho \mathbf{u})}{\partial t} + \nabla \cdot \left(\mathbf{u} \times (\rho \mathbf{u}) \right) + \nabla p = \rho \mathbf{g} \]
+				\[ \frac{\partial (\rho \mathbf{u})}{\partial t} + \nabla \cdot \left(\mathbf{u} \otimes (\rho \mathbf{u}) \right) + \nabla p = \rho \mathbf{g} \]
 				</section>
 				</section>	
 				<section id="6" class="present" style="top: 0px; display: block; text-align: left;">
@@ -158,7 +158,7 @@
 				<h3>Rate of Phase Change: Hertz-Knudsen Model</h3>
 				<p>What is $\alpha$?</p>
 				<p>To set the pressure at the liquid phase</p>
-				\[ p_{sat} = exp \left[ - \frac{\Delta H_v}{R T_0} + B \right] \]
+				\[ p_{sat} = \exp \left[ - \frac{\Delta H_v}{R T_0} + B \right] \]
 				</section>
 				</section>	
 				<section id="5" class="present" style="top: 0px; display: block; text-align: left;">
@@ -325,9 +325,9 @@
 				</section>
 				<section>
 				<h3>What is next?</h3>
-				<li>In depth analysis is needed: more tests, further analysis of the results...</li>
-				<li>Investigate the role of condensation in depth</li>
-				<li>Include these effects in more complex geometries and proper sloshing tanks</li>
+				<li>In-depth analysis is needed: more tests, further analysis of results...</li>
+				<li>Investigating the role of condensation in depth</li>
+				<li>Including these effects in more complex geometries and proper sloshing tanks</li>
 				</section>
 				</section>	
 				<section id="10" class="present" style="top: 0px; display: block; text-align: left;">
