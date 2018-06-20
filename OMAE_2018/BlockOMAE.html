@@ -59,7 +59,7 @@
 								Javier Calderon-Sanchez <br>
 								<a href="mailto://javier.calderon@upm.es">javier.calderon@upm.es</a><br>
 								<br>
-								<br>
+								CEHINAV Res. Gr., DFAIAN, ETSIN<br>
 								Universidad Politécnica de Madrid<br>
 								21/06/2018
 								</td>
@@ -77,7 +77,7 @@
 				<h3>Motivation</h3>
 				<p class="fragment">LNG is normally transported in LNG membrane tanks</p>
 				<p class="fragment">that "suffer" from sloshing.</p>
-				<p class="fragment">Physical phenomena in sloshing is difficult to assess</p>
+				<p class="fragment">Physical phenomena in sloshing is difficult to assess.</p>
 				<p class="fragment">Why?
 				</section>
 				<section>
@@ -87,20 +87,20 @@
 				<p class="fragment">with relatively high liquid/vapour density ratio</p>
 				<p class="fragment">and transported in huge amounts (up to 1 000 olympic pools!)</p>
 				<p class="fragment">This makes it difficult to obtain accurate predictions experimentally <span>&#9760;</span></p>
-				<p class="fragment">That is why numerical approaches are used instead</p>
+				<p class="fragment">That is why numerical approaches are used instead.</p>
 				</section>
 				<section>
 				<h3>Motivation</h3>
 				<p>Phenomenology of pressure impacts &#8594; Effects</p> <!-- &#8594 This is an arrow -->
 				<img class="plain" src="imgs/Momentum.png" style="width:100%; border:none;box-shadow:none">
-				<p class="fragment">However, only a few authors (Behruzi et al, 2014 or Ancellin et al, 2016) have tried to study phase change</p>
+				<p class="fragment">However, only a few authors (Behruzi et al, 2014 or Ancellin et al, 2016) have tried to study phase change.</p>
 				</section>				
 				</section>
 				</section>
 				<section id="2" class="present" style="top: 0px; display: block; text-align: left;">
 				<section>
 				<h2>AIM</h2>
-				<p>To analyze numerically phase change in LNG tank impacts, in order to determine its influence on sloshing phenomena</p>
+				<p>To analyze numerically phase change in an open-source multiphase compressible solver for LNG tank impacts, in order to determine its influence on sloshing phenomena</p>
 				</section>
 				<section>
 				<h2>METHOD</h2>
@@ -134,6 +134,7 @@
 				<section id="6" class="present" style="top: 0px; display: block; text-align: left;">
 				<section>
 				<h3>Conservation Equations</h3>
+				<p>Volume of Fluid (VOF) Two-phase incompressible, isothermal, immiscible fluids.</p>
 				\[ \frac{\partial (\alpha_l)}{\partial t} + \nabla \cdot (\alpha_l \mathbf{u}) + \nabla \cdot  (\alpha_l \alpha_v \mathbf{u}_r) = 0 \]
 				<br>
 				\[ \frac{\partial (\rho \mathbf{u})}{\partial t} + \nabla \cdot \left(\mathbf{u} \otimes (\rho \mathbf{u}) \right) + \nabla p = \rho \mathbf{g} \]
@@ -144,8 +145,11 @@
 				<h3>Compressibility: Equation of State</h3>
 				<p>Compressible model &#8594; Conservation of energy</p>
 				\[ \frac{\partial E}{\partial t} + \nabla \cdot ( \mathbf{u} ( E + p) ) = 0,\]
+				\[ E = \rho e + \frac{1}{2} \rho \mathbf{u}^2 \]
 				<p>To close the system, we chose the Stiffened EOS</p>
 				\[ p + \pi = \left( \gamma - 1 \right) e \rho \]
+				<br>
+				\[ c = \sqrt{\frac{\gamma p_0 + \pi}{\rho_0}} \]
 				</section>
 				</section>		
 				<section id="8" class="present" style="top: 0px; display: block; text-align: left;">
