@@ -56,12 +56,12 @@
 								Daniel Duque
 								</td>
 								<td style="text-align : center">
-									Javier Calderon-Sanchez <br>
-									<a href="mailto://javier.calderon@upm.es">javier.calderon@upm.es</a><br>
-									<br>
-									<br>
-									Universidad Politécnica de Madrid<br>
-									21/06/2018
+								Javier Calderon-Sanchez <br>
+								<a href="mailto://javier.calderon@upm.es">javier.calderon@upm.es</a><br>
+								<br>
+								<br>
+								Universidad Politécnica de Madrid<br>
+								21/06/2018
 								</td>
 								<td style="vertical-align : top ">
 								Jesus Gómez-Goñi
@@ -72,16 +72,39 @@
 					<p></p>
 				</section>
 				</section>	
-				<!-- Slide 2 -->
-				<section id="2" class="present" style="top: 0px; display: block; text-align: left;" data-background-image="">
+				<section id="2" class="present" style="top: 0px; display: block; text-align: left;">
 				<section>
-				<h2>AIM</h2>
-				<p>To analyze phase change in LNG tank impacts, in order to determine its influence on sloshing phenomena</p>
+				<h3>Motivation</h3>
+				<p class="fragment">LNG is normally transported in LNG membrane tanks</p>
+				<p class="fragment">that "suffer" from sloshing.</p>
+				<p class="fragment">Physical phenomena in sloshing is difficult to assess</p>
+				<p class="fragment">Why?
 				</section>
 				<section>
-				<h2>INDEX</h2>
+				<h3>Motivation</h3>
+				<p class="fragment">Violent, short duration, impact (stochastic behaviour)...</p>
+				<p class="fragment">... at cryogenic conditions</p>
+				<p class="fragment">with relatively high liquid/vapour density ratio</p>
+				<p class="fragment">and transported in huge amounts (up to 1 000 olympic pools!)</p>
+				<p class="fragment">This makes it difficult to obtain accurate predictions experimentally <span>&#9760;</span></p>
+				<p class="fragment">That is why numerical approaches are used instead</p>
+				</section>
+				<section>
+				<h3>Motivation</h3>
+				<p>Phenomenology of pressure impacts &#8594; Effects</p> <!-- &#8594 This is an arrow -->
+				<img class="plain" src="imgs/Momentum.png" style="width:100%; border:none;box-shadow:none">
+				<p class="fragment">However, only a few authors (Behruzi et al, 2014 or Ancellin et al, 2016) have tried to study phase change</p>
+				</section>				
+				</section>
+				</section>
+				<section id="2" class="present" style="top: 0px; display: block; text-align: left;">
+				<section>
+				<h2>AIM</h2>
+				<p>To analyze numerically phase change in LNG tank impacts, in order to determine its influence on sloshing phenomena</p>
+				</section>
+				<section>
+				<h2>METHOD</h2>
 				<ol>
-				<li>Physical phenomena associated to sloshing</li>
 				<li>Physics of phase change</li>
 				<li>Numerical model</li>
 				<li>Results</li>
@@ -89,32 +112,10 @@
 				</ol>
 				</section>
 				</section>
-				<section id="3" class="present" style="top: 0px; display: block; text-align: left;">
-				<section>
-				<h3>Physical phenomena in sloshing</h3>
-				<p>Difficult to assess! Why?</p>
-				<ul>
-				<li>Violent, short duration, impact (stochastic behaviour)...</li>
-				<li>... at cryogenic conditions</li>
-				<li>relatively high liquid/vapour density ratio</li>
-				<li>transported in huge amounts (up to 1 000 olympic pools!)</li>
-				</ul>
-				<p>This makes it difficult to obtain accurate predictions experimentally <span>&#9760;</span></p>
-				<p>Let's try the numerical approach then!</p>
-				</section>
-				</section>								
-				<!-- Slide 4 -->
-				<section id="4" class="present" style="top: 0px; display: block; text-align: left;">
-				<section>
-				<aside>Why phase change in sloshing?</aside>
-				<p>Phenomenology of pressure impacts &#8594; Effects</p> <!-- &#8594 This is an arrow -->
-				<img class="plain" src="imgs/Momentum.png" style="width:100%; border:none;box-shadow:none">
-				</section>
-				</section>
-				
 				<section id="5" class="present" style="top: 0px; display: block; text-align: left;">
 				<section>
 				<h3>Physics of Phase Change</h3>
+				<p>Why phase change in sloshing?</p>
 				<block class="fragment current-visible" data-fragment-index="1">
 					<img class="plain" src="imgs/tank1.png" style="position:absolute; width:55%; border:none;box-shadow:none">
 				</block>
@@ -130,7 +131,7 @@
 				</div>
 				</section>
 				</section>
-				<section id="5" class="present" style="top: 0px; display: block; text-align: left;">
+				<section id="6" class="present" style="top: 0px; display: block; text-align: left;">
 				<section>
 				<h3>Conservation Equations</h3>
 				\[ \frac{\partial (\alpha_l)}{\partial t} + \nabla \cdot (\alpha_l \mathbf{u}) + \nabla \cdot  (\alpha_l \alpha_v \mathbf{u}_r) = 0 \]
@@ -138,7 +139,7 @@
 				\[ \frac{\partial (\rho \mathbf{u})}{\partial t} + \nabla \cdot \left(\mathbf{u} \otimes (\rho \mathbf{u}) \right) + \nabla p = \rho \mathbf{g} \]
 				</section>
 				</section>	
-				<section id="6" class="present" style="top: 0px; display: block; text-align: left;">
+				<section id="7" class="present" style="top: 0px; display: block; text-align: left;">
 				<section>
 				<h3>Compressibility: Equation of State</h3>
 				<p>Compressible model &#8594; Conservation of energy</p>
@@ -147,7 +148,7 @@
 				\[ p + \pi = \left( \gamma - 1 \right) e \rho \]
 				</section>
 				</section>		
-				<section id="7" class="present" style="top: 0px; display: block; text-align: left;">
+				<section id="8" class="present" style="top: 0px; display: block; text-align: left;">
 				<section>
 				<h3>Rate of Phase Change: Hertz-Knudsen Model</h3>
 				<p>Mass conservation between phases is not assured any more</p>
@@ -156,12 +157,12 @@
 				</section>
 				<section>				
 				<h3>Rate of Phase Change: Hertz-Knudsen Model</h3>
-				<p>What is $\alpha$?</p>
+				<p>What are the  $C_v$ and $C_c$ coefficients?</p>
 				<p>To set the pressure at the liquid phase</p>
 				\[ p_{sat} = \exp \left[ - \frac{\Delta H_v}{R T_0} + B \right] \]
 				</section>
 				</section>	
-				<section id="5" class="present" style="top: 0px; display: block; text-align: left;">
+				<section id="9" class="present" style="top: 0px; display: block; text-align: left;">
 				<section>
 				<h3>Conservation Equations</h3>
 				<p>\[ \frac{\partial (\alpha_l)}{\partial t} + \nabla \cdot (\alpha_l \mathbf{u}) + \nabla \cdot \alpha_l \alpha_v \mathbf{u}_r) = \frac{\dot{\rho}}{\rho} \]</p>
@@ -171,11 +172,11 @@
 				<p>\[ \dot{m} = A \sqrt{\frac{M}{2 \pi R_u}} \left( C_v \frac{p_{sat}}{\sqrt{T_{sat}}} - C_c \frac{p_{gas}}{\sqrt{T_{gas}}} \right)  \]</p>
 				</section>
 				</section>	
-				<section id="8" class="present" style="top: 0px; display: block; text-align: left;">
+				<section id="10" class="present" style="top: 0px; display: block; text-align: left;">
 				<section>
 				<h3>Thermodynamic Variables</h3>
 				<div>
-				<p>Water Model</p>
+				<!--p>Water Model</p>
 				<table>
 						<thead>
 							<tr>
@@ -207,7 +208,7 @@
 						</tbody>
 					<!--caption>Table 1</caption-->
 					</table>
-				<p>Methane Model</p>
+				<!--p>Methane Model</p-->
 					<table>
 						<thead>
 							<tr>
@@ -237,12 +238,12 @@
 								<td>111</td>
 							</tr>
 						</tbody>
-					<!--caption>Table 1</caption-->
+					<caption>Table 1: Methane properties</caption>
 					</table>
 				</div>
 				</section>
 				</section>							
-				<section id="9" class="present" style="top: 0px; display: block; text-align: left;">
+				<section id="11" class="present" style="top: 0px; display: block; text-align: left;">
 				<section>
 				<h2 style="text-align: center;">Results</h2>
 				</section>
@@ -313,7 +314,7 @@
 				</div>
 				</section>	
 				</section>
-				<section id="10" class="present" style="top: 0px; display: block; text-align: left;">
+				<section id="12" class="present" style="top: 0px; display: block; text-align: left;">
 				<section>
 				<h3>Conclusions</h3>
 				<ol>
@@ -330,7 +331,7 @@
 				<li>Including these effects in more complex geometries and proper sloshing tanks</li>
 				</section>
 				</section>	
-				<section id="10" class="present" style="top: 0px; display: block; text-align: left;">
+				<section id="13" class="present" style="top: 0px; display: block; text-align: left;">
 				<section>
 				<h1 style="text-align:center">Thanks for your attention</h1>
 				</section>
