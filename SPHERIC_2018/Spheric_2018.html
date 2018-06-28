@@ -126,7 +126,7 @@
 				</section>
 				<section>
 				<aside class="notes"> Which is the problem with this formulation? Well, as we have already seen </aside>
-				<p>Truncate kernel's compact support at the domain edge makes SPH interpolation fail...</p> 
+				<p>Truncating kernel's compact support at the domain edge makes SPH interpolation fail...</p> 
 				<p class="fragment">...unless consistency is recovered</p>
 				<p class="fragment">Boundary Integrals</p>
 				<ul class="fragment">
@@ -169,7 +169,7 @@
 				<section>
 				<p>The general solution is given by the equality of the integrands</p>
 				\[ \frac{1}{\rho^{d-1}} \frac{d \left( \rho^d \, F (\rho) \right) }{d \rho} = W_h (\rho) \]
-				<p>and choosing e.g. a Quintic Wendland kernel</p>
+				<p>and choosing e.g. a quintic Wendland kernel</p>
 				\[ F(\rho) = \frac{1}{h^d} \ \tilde{F} \left (\frac\rho{h} \right) \]
 				\[ \tilde{F} (q) = - \frac{7}{64 \pi} \left[
     				\frac{2}{7} q^5 -
@@ -279,6 +279,14 @@
 				<div>
 				<img class="plain" src="imgs/NewHeader.png" style="position:absolute;width:20%;left:40%;bottom:-15%">
 				</div>
+				</section>
+				<section>
+				<block style="width:50%;float:left">
+				<img class="plain" src="imgs/TLD_Old.png">
+				</block>
+				<block style="width:50%;float:right">
+				<img class="plain" src="imgs/TLD_New.png">
+				</block>
 				</section>
 				</section>
 				<section id="13" class="present" style="top: 0px; display: block; text-align: left;">
