@@ -43,7 +43,8 @@
 				<!-- Slide 1: TITLE -->			
 				<section id="Title" class="present" data-background-image="imgs/Background80_blue.png">
 				<section>
-					<p>13th SPHERIC, Galway, Ireland, 2018</p>
+					<p>13th SPHERIC Workshop on SPH applications</p>
+					<p>Galway, Ireland, 2018</p>
 					<h3>A NEW SHEPARD RENORMALIZATION FACTOR FORMULATION FOR BOUNDARY INTEGRALS</h3>
 					<br>
 					<p></p><small><table style="width:100%">
@@ -51,23 +52,23 @@
 							<tr>
 								<td style="text-align : center">
 								Jose Luis Cercos-Pita
-								<br>
+								<!--br>
 								NASAL Systems S.L.
-								Madrid, Spain<br>
+								Madrid, Spain<br-->
 								</td>
 								<td style="text-align : center">
 								Javier Calderon-Sanchez <br>
 								<a href="mailto://javier.calderon@upm.es">javier.calderon@upm.es</a><br>
-								<br>
-								CEHINAV Res. Gr., DFAIAN, ETSIN<br>
-								Universidad Politécnica de Madrid<br>
-								28/06/2018
+								<!--br>
+								CEHINAV Res. Gr., DFAIAN, ETSIN<br-->
+								<br>Universidad Politécnica de Madrid<br>
+								<br>28/06/2018
 								</td>
-								<td style="text align : center">
+								<td style="text-align : center">
 								Daniel Duque
-								<br>
+								<!--br>
 								CEHINAV Res. Gr., DFAIAN, ETSIN<br>
-								Universidad Politécnica de Madrid<br>
+								Universidad Politécnica de Madrid<br-->
 								</td>
 							</tr>
 							</tbody>
@@ -77,39 +78,41 @@
 				</section>	
 				<section id="2" class="present" style="top: 0px; display: block; text-align: left;">
 				<section>
-				<h1>THE PROBLEM</h1>
+				<h1 style="text-align: center">THE PROBLEM</h1>
 				</section>
 				<section>
 				<p>Let's assume a tank at rest, with no movement...</p>
+				<div>
+				<video controls data-src="videos/old.mp4" type="video/mp4"></video>
+				</div>
+				<div>
+				<img class="plain" src="imgs/NewHeader.png" style="position:absolute;width:20%;left:35%;bottom:-7%">
+				</div>
 				</section>
 				<section>
-				<p>Truncate kernel's compact support at the domain edge makes SPH interpolation fail unless consistency is recovered</p>
+				<h1 style="text-align:center">Boundary Integrals?</h1>
 				</section>
+				<section>
+				<div>
+				<img src="imgs/BoundaryIntegralsRejection.png" style="width:100%; border:none;box-shadow:none">
+				</div>
+				</section>
+				<!--section>
+				<p>Truncate kernel's compact support at the domain edge makes SPH interpolation fail...</p> 
+				<p>...unless consistency is recovered</p>
+				<p>Boundary Integrals... <span style="font-size:100px">&#9760;</span>
+				</section-->
 				</section>
 				<section id="2" class="present" style="top: 0px; display: block; text-align: left;">
 				<section>
-				<h2>Aim</h2>
-				<p>To improve the accuracy of numerical Boundary Integrals approach without increasing its computational cost</p>
-				</section>
-				<section>
-				<h2>Method</h2>
-				<ol>
-				<li>Alternative formulation</li>
-				<li>Shepard Evaluation. Solution</li>
-				<li>Application</li>
-				</ol>
-				</section>
-				</section>
-				<section id="2" class="present" style="top: 0px; display: block; text-align: left;">
-				<h4>Alternative formulation for the Shepard Renormalization factor</h4>
-				<section>
-				<block>
+				<p>Let's go back to see where this comes from</p>
+				<block class="fragment">
 				<img class="plain" src="imgs/continuum-boundary.png" style="position:absolute; width:45%; border:none;box-shadow:none">
 				</block>
-				<div style="width:40%; float:right">
+				<div class="fragment" style="width:45%; float:right">
 				\[ \left\langle \mathcal{D} f(\mathbf{x}) \right\rangle = \] <br>
 				\[ \displaystyle{ \int_{\bar{\Omega}} f(\mathbf{y}) \nabla W_h (\mathbf{y} - \mathbf{x})\ d\mathbf{y}} \] <br>
-				\[ + \displaystyle{\int_{\Omega^{*}} f(\mathbf{y}) \nabla W_h (\mathbf{y} - \mathbf{x})\ d\mathbf{y}} \] <br>
+				<span class="fragment highlight-red">\[ + \displaystyle{\int_{\Omega^{*}} f(\mathbf{y}) \nabla W_h (\mathbf{y} - \mathbf{x})\ d\mathbf{y}} \] </span><br>
 				</div>
 				</section>
 				<section>
@@ -119,33 +122,54 @@
 				 + \mathcal{O}(h) \]
 				<br>
 				\[ \gamma(\mathbf{x}) := \int_{\bar{\Omega}} W_h (\mathbf{y} - \mathbf{x}) d\mathbf{y} \]
-				<aside class="notes"> The main setback of this formulation comes from the fact that the Shepard renormalization factor breaks the symmetry form of the operators, and therefore momentum and energy conservation cannot be assured anymore. </aside>
+				<aside class="notes"> Applying divergence theorem and kernel properties, popular expression...</aside>
 				</section>
 				<section>
-				<ul>
-				<li>Breaks the symmetry form of the operators</li>
-				<li>Free surface inconsistencies. It would be necessary to explicitly model both phases</li>
+				<aside class="notes"> Which is the problem with this formulation? Well, as we have already seen </aside>
+				<p>Truncate kernel's compact support at the domain edge makes SPH interpolation fail...</p> 
+				<p class="fragment">...unless consistency is recovered</p>
+				<p class="fragment">Boundary Integrals</p>
+				<ul class="fragment">
+				<li>Break the symmetry form of the operators</li>
+				<li>Generate free surface inconsistencies</li>
 				</ul>
-				<p>This limits the applicability of Boundary Integrals!</p>
-				<p>We need something new...</p>
+				<p class="fragment">This limits the applicability of Boundary Integrals!</p>
+				<p class="fragment">We need something new...</p>
+				</section>
+				</section>
+				<section id="2" class="present" style="top: 0px; display: block; text-align: left;">
+				<section>
+				<h2 style="text-align:center">Aim</h2>
+				<blockquote style="text-align:center;width:90%">To improve the accuracy of numerical Boundary Integrals approach without increasing its computational cost.</blockquote>
+				</section>
+				<section>
+				<h2>Method</h2>
+				<ol>
+				<li>Alternative formulation</li>
+				<li>Evaluation</li>
+				<li>Application</li>
+				</ol>
 				</section>
 				</section>
 				<section id="3" class="present" style="top: 0px; display: block; text-align: left;">
-				<h4>Alternative formulation for the Shepard Renormalization factor</h4>
+				<h4>Alternative formulation</h4>
 				<section>
 				<p>So, kernel is normalized</p>
 				\[ \int_{\bar{\Omega}} W_h (\mathbf{y} - \mathbf{x})\ d\mathbf{y} \, + \int_{\Omega^{*}} W_h (\mathbf{y} - \mathbf{x})\ d\mathbf{y} = 1 \]
-				<p>Therefore</p>
+				<p>And therefore</p>
 				\[ \gamma(\mathbf{x}) = 1 - \int_{\Omega^{*}} W_h (\mathbf{y} - \mathbf{x})\ d\mathbf{y} \]
 				</section>
 				<section>
+				<p>Let's seek a function $F (\mathbf{y} - \mathbf{x})$</p>
 				\[ \int_{\Omega^{*}} \nabla \cdot \left[ (\mathbf{y} - \mathbf{x})\ F (\mathbf{y} - \mathbf{x}) \right] = \int_{\Omega^{*}} W_h (\mathbf{y} - \mathbf{x})\ d\mathbf{y} \]
 				<p>So that...</p>
 				\[ \gamma(\mathbf{x}) = 1 + \int_{\partial \bar{\Omega}} \mathbf{n} (\mathbf{y}) \cdot (\mathbf{y} - \mathbf{x})\ F(\mathbf{y} - \mathbf{x})\ d\mathbf{y} \]
-				<p>Free surface independent</p>
+				<p>so that we can express $\gamma (\mathbf{x})$ in terms of surface terms.</p>
 				</section>
 				<section>
+				<p>The general solution is given by the equality of the integrands</p>
 				\[ \frac{1}{\rho^{d-1}} \frac{d \left( \rho^d \, F (\rho) \right) }{d \rho} = W_h (\rho) \]
+				<p>and choosing e.g. a Quintic Wendland kernel</p>
 				\[ F(\rho) = \frac{1}{h^d} \ \tilde{F} \left (\frac\rho{h} \right) \]
 				\[ \tilde{F} (q) = - \frac{7}{64 \pi} \left[
     				\frac{2}{7} q^5 -
@@ -155,84 +179,113 @@
     				8
     				\right]
   					- \color{red}{\frac{1}{2 \pi \, q^2}} \]
-				<p>It's a singular function</p>
+				<p class="fragment">It's a singular function!</p>
 				</section>
 				<section>
-				<block style="width:50%; float:left">
-				<img class="plain" src="imgs/Shepard_hfac.png" style="position:absolute; width:50%;border:none;box-shadow:none">
-				</block>				
-				<div style="width:40%; float:right">
-				<p>Effect of having a singular function near the bundary</p>
-				<p>No matter how much the support is increased!</p>
-				</div>
+				<p>Which is the effect?</p>
+				<block style="width:50%; float:centre">
+				<img class="plain" src="imgs/Shepard_hfac.png" style="position:relative; left:20%; width:50%;border:none;box-shadow:none">
+				</block>
+				<block>
+				<p class="fragment">No matter how much the support is increased!</p>
+				</block>
 				</section>
 				</section>
 				<section id="4" class="present" style="top: 0px; display: block; text-align: left;">
-				<h4>Semi-Analytical Solution for the $\gamma$ evaluation</h4>
+				<h4>$\gamma$ evaluation</h4>
 				<section>
 				<p>Apparently, we just introduced new difficulties...</p>
-				<p>However, let us turn Shepard factor into its discretized form</p>
-				\[ \gamma(\mathbf{x}) = 1 + \sum_j \int_{S_j} \mathbf{n} (\mathbf{y}) \cdot (\mathbf{y} - \mathbf{x}) \ F ( \mathbf{y} - \mathbf{x} )\, d\mathbf{y} \]
+				<p class="fragment">However, let us turn Shepard factor into its discretized form</p>
+				<p class="fragment">\[ \gamma(\mathbf{x}) = 1 + \sum_j \int_{S_j} \mathbf{n} (\mathbf{y}) \cdot (\mathbf{y} - \mathbf{x}) \ F ( \mathbf{y} - \mathbf{x} )\, d\mathbf{y} \]</p>
 				</section>
 				<section>
 				<p>Assuming patches at the boundary are sufficiently flat...</p>
-				<block style="width:30%; float:left">
-				<img class="plain" src="imgs/discretization.png" style="position:absolute;border:none;box-shadow:none">
+				<block style="width:35%; float:left">
+				<img class="plain" src="imgs/discretization-fill.png" style="position:absolute;width:35%;border:none;box-shadow:none">
 				</block>				
-				<div style="width:45%; float:right">
-				$ \gamma(\mathbf{x}) - 1 \simeq $
+				<div style="width:55%; float:right">
+				<br>
+				<br>
+				<small>$ \gamma(\mathbf{x}) - 1 \simeq $
 				$ \sum_j \mathbf{n}_j \cdot (\mathbf{y}_j - \mathbf{x} ) \int_{S_j} F (\mathbf{y} - \mathbf{x}) \, d\mathbf{y} $
+				<p>and noting that we can split the kernel in two parts...</p>
+				\[ \tilde{F} (q) = - \frac{7}{64 \pi} \left[
+    				\frac{2}{7} q^5 -
+    				\frac{5}{2} q^4 +
+    				8 q^3 -
+    				10 q^2 +
+    				8
+    				\right]
+  					- \color{red}{\frac{1}{2 \pi \, q^2}} \]
+				<p>We can integrate it separately</p>
+				</small>
 				</div>
 				</section>
 				<section>
-				<p>Finally...</p>
-				\[ \mathbf{n}_j \cdot (\mathbf{y} - \mathbf{x} ) \int_{S_j}   F_\text{D} (\mathbf{y} - \mathbf{x}) \, d\mathbf{y} = \displaystyle -\frac1{2\pi} \Delta\theta_j \]
+				<p>We keep on solving it numerically, but...</p>
+				<p class="fragment">...for the divergent part we can find an analytical solution</p>
+				<p class="fragment">\[ \mathbf{n}_j \cdot (\mathbf{y} - \mathbf{x} ) \int_{S_j}   F_\text{D} (\mathbf{y} - \mathbf{x}) \, d\mathbf{y} = \displaystyle -\frac1{2\pi} \Delta\theta_j \]</p>
 				</section>
 				<section>
 				<p>This formulation correctly predicts the value of the Shepard factor at the boundary </p>
+				<p>In the particular case of a flat wall</p>
 				\[ \gamma(\mathbf{x}) - 1  \rightarrow -\frac{1}{2\pi} \pi = -\frac{1}{2} \]
+				<p>Combining flat patches and approaching it with different angles, we obtain Shepard values at corners</p>
 				</section>
 				<section>
-				<p>Combining flat patches and approaching it with different angles, we obtain Shepard values at corners</p>
-				<table>
-						<thead>
-							<tr>
-								<th colspan="5" style="text-align:center;border: 1px solid white;" >Angle</th>
-							</tr>
-							<tr>
-								<th colspan="2" style="border: 1px solid white;" rowspan="2"></th>
-								<th style="border: 1px solid white;">45</th>
-								<th style="border: 1px solid white;">90</th>
-								<th style="border: 1px solid white;">135</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td style="border: 1px solid white;" rowspan="0">Shepard Factor</td>
-								<td style="border: 1px solid white;">Vertical</td>
-								<td style="border: 1px solid white;">...</td>
-								<td style="border: 1px solid white;">...</td>
-								<td style="border: 1px solid white;">...</td>
-							</tr>
-							<tr>
-								<td style="border: 1px solid white;">Diagonal</td>
-								<td style="border: 1px solid white;">...</td>
-								<td style="border: 1px solid white;">...</td>
-								<td style="border: 1px solid white;">...</td>
-							</tr>
-						</tbody>
-					<!--caption>Table 1</caption-->
-					</table>
+				<p>90º</p>
+				<div style="width:45%;float:left">
+				<p>Vertical</p>
+				<img class="plain" src="imgs/90CornerV.png" style="border:none;box-shadow:none">
+				</div>
+				<div style="width:45%;float:right">
+				<p>Diagonal</p>
+				<img class="plain" src="imgs/90CornerD.png" style="border:none;box-shadow:none">
+				</div>
+				</section>
+				<section>
+				<p>45º</p>
+				<div style="width:45%;float:left">
+				<p>Vertical</p>
+				<img class="plain" src="imgs/45CornerV.png" style="border:none;box-shadow:none">
+				</div>
+				<div style="width:45%;float:right">
+				<p>Diagonal</p>
+				<img class="plain" src="imgs/45CornerD.png" style="border:none;box-shadow:none">
+				</div>
+				</section>
+				<section>
+				<p>135º</p>
+				<div style="width:45%;float:left">
+				<p>Vertical</p>
+				<img class="plain" src="imgs/135CornerV.png" style="border:none;box-shadow:none">
+				</div>
+				<div style="width:45%;float:right">
+				<p>Diagonal</p>
+				<img class="plain" src="imgs/135CornerD.png" style="border:none;box-shadow:none">
+				</div>
 				</section>
 				</section>
 				<section id="5" class="present" style="top: 0px; display: block; text-align: left;">
 				<h3>Applications</h3>
 				<section>
-				
+				<p>How does it behave compared to what we had?</p>
+				<block style="width:50%;float:left">
+				<video data-autoplay controls="True" data-src="videos/old.mp4" type="video/mp4"></video>
+				</block>
+				<block style="width:50%;float:right">
+				<video data-autoplay controls="True" data-src="videos/new.mp4" type="video/mp4"></video>
+				</block>
+				<div>
+				<img class="plain" src="imgs/NewHeader.png" style="position:absolute;width:20%;left:40%;bottom:-15%">
+				</div>
 				</section>
 				</section>
 				<section id="13" class="present" style="top: 0px; display: block; text-align: left;">
-				<section>
+				<section data-background-image="imgs/photo.jpg">
+				<br>
+				<br>
+				<br>
 				<h1 style="text-align:center">Thanks for your attention</h1>
 				</section>
 				</section>								
